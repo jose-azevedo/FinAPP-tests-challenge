@@ -16,7 +16,7 @@ enum OperationType {
 }
 
 @Entity('statements')
-export class Statement {
+class Statement {
   @PrimaryGeneratedColumn('uuid')
   id?: string;
 
@@ -48,3 +48,5 @@ export class Statement {
     }
   }
 }
+
+export { Statement, OperationType }
