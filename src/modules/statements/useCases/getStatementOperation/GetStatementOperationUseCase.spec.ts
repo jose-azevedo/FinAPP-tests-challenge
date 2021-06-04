@@ -60,26 +60,15 @@ describe('Get Statement Operation Use Case', () => {
     expect(statement.type).toBe('withdraw');
   });
 
-  // Dentro do expect
-  it('Should not be able to get nonexistent statement operation', () => {
-    expect(async () => {
-      const { id: user_id }  = await createUserUseCase.execute(sampleUser);
-
-      await getStatementOperationUseCase.execute({
-        user_id: user_id as string,
-        statement_id: 'nonexistent_statement_id'
-      });
-    }).rejects.toBeInstanceOf(GetStatementOperationError.StatementNotFound);
-  })
-
-  // Fora do expect
   it('Should not be able to get nonexistent statement operation', async () => {
     const { id: user_id }  = await createUserUseCase.execute(sampleUser);
 
-    await getStatementOperationUseCase.execute({
-      user_id: user_id as string,
-      statement_id: 'nonexistent_statement_id'
-    });
+    await expect(
+      getStatementOperationUseCase.execute({
+        user_id: user_id as string,
+        statement_id: 'nonexistent_statement_id'
+      })
+    ).rejects.toBeInstanceOf(GetStatementOperationError.StatementNotFound);
   })
 
   it('Should not be able to get statement operation of nonexistent user', () => {
