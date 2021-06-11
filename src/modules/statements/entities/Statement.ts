@@ -1,10 +1,10 @@
 import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  JoinColumn,
-  ManyToOne,
-  PrimaryGeneratedColumn
+	Column,
+	CreateDateColumn,
+	Entity,
+	JoinColumn,
+	ManyToOne,
+	PrimaryGeneratedColumn
 } from 'typeorm';
 import { v4 as uuid } from 'uuid';
 
@@ -13,6 +13,7 @@ import { User } from '../../users/entities/User';
 enum OperationType {
   DEPOSIT = 'deposit',
   WITHDRAW = 'withdraw',
+	TRANSFER = 'transfer'
 }
 
 @Entity('statements')
@@ -26,6 +27,12 @@ class Statement {
   @ManyToOne(() => User, user => user.statement)
   @JoinColumn({ name: 'user_id' })
   user: User;
+
+	@Column()
+	sender_id?: string;
+
+	@Column()
+	recipient_id?: string;
 
   @Column()
   description: string;
@@ -42,11 +49,11 @@ class Statement {
   @CreateDateColumn()
   updated_at: Date;
 
-  constructor() {
-    if (!this.id) {
-      this.id = uuid();
-    }
+  constructor () {
+  	if (!this.id) {
+  		this.id = uuid();
+  	}
   }
 }
 
-export { Statement, OperationType }
+export { Statement, OperationType };
