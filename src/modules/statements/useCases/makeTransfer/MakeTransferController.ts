@@ -6,7 +6,7 @@ import { MakeTransferUseCase } from './MakeTransferUseCase';
 class MakeTransferController {
 	async handle (request: Request, response: Response): Promise<Response> {
 		const { id: sender_id } = request.user;
-		const { id: recipient_id } = request.params;
+		const { recipient_id } = request.params;
 		const { amount, description } = request.body;
 
 		const makeTransferUseCase = container.resolve(MakeTransferUseCase);

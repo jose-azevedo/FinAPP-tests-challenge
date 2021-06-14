@@ -37,7 +37,7 @@ export class accountsTable1616682561481 implements MigrationInterface {
 				{
 					name: 'type',
 					type: 'enum',
-					enum: ['deposit', 'withdraw', 'transfer']
+					enum: ['deposit', 'transfer', 'withdraw']
 				},
 				{
 					name: 'created_at',
